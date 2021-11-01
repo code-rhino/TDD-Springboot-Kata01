@@ -2,6 +2,6 @@
 
 The Spring course consists of a tutorial that teach students about Spring Boot. The courses lay out examples that are discussed via documentation, located under the `assets\docs` directory.
 
-link:assets/TableOfContents.adoc[Table Of Contents]
+link:../../assets/TableOfContents.adoc[Table Of Contents]
 
 The best way to take this course is to checkout the entire project locally, then view:
