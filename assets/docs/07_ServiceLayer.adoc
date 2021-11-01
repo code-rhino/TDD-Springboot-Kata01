@@ -1,0 +1,69 @@
+= Spring Boot - The Service Layer
+:toc:
+:toclevels: 4
+
+Building the service layer and its unit tests
+
+== The Service Layer
+
+The service layer:
+
+* breaks down the incoming request from the controller
+* makes the necessary calls to the repository layers
+* stitches the response Java objects
+* sends them back to the API/Controller layer
+* performs business logic validations
+* throws the right exceptions when issues are encountered
+
+We use an interface-implementation model here, so we have more flexibility in autowiring and testing.
+
+. Service Interface +
+⇒ link:../../phonebook/src/main/java/com/codedifferently/phonebook/widgets/services/WidgetService.java[WidgetService.java] +
+.. This interface defines all the service methods that are publicly available.
+
+. Service Implementation +
+⇒ link:../../phonebook/src/main/java/com/codedifferently/phonebook/widgets/services/WidgetServiceImpl.java[WidgetServiceImpl.java] +
+.. The Service implementation implements all the methods listed in the Service interface.
+.. The `constructor` autowires a `WidgetRepo` interface which is made available via a Spring
+context.
+.. The Service implementation also includes validations of some constraints. These validations
+throw necessary custom exceptions (in this example, extending the RuntimeException).
+
+'''
+
+== The Service unit test
+
+The service is tested with `@SpringBootTest`.
+
+. Test extending the abstract test setup +
+⇒ link:../../phonebook/src/test/java/com/codedifferently/phonebook/widgets/services/WidgetServiceTest.java[WidgetServiceTest.java]
+.. The `setUp()` method runs *_before each test method_* and adds a Mock implementation of the
+repository.
+.. A Mock object wraps around the actual one, and replaces certain method calls with other
+functionality.
+.. In this example, the mock object replaces actual database calls with fake responses simulating
+a database access.
+.. This test can thus run without a database.
+
+IMPORTANT: The mock mockWidgetRepo switches functionality *_when_* a matching condition is met. The
+`thenReturn` or `thenAnswer` provides a response that simulates the actual database action.
+
+'''
+
+== Exercise Lab
+
+image:../../assets/images/labtime.png[Lab, align="center"]
+
+. Create the lab service layer and unit test. Standard CRUD operations on Account plus methods for:
+.. Find By lastName, should return a list.
+
+'''
+
+[width=100%, cols="<10%,^80%,>10%",grid=none,frame=ends]
+|===
+| Prev | TOC | Next
+
+| link:06_Exceptions.adoc[Working with Exceptions]
+| link:TableOfContents.adoc[TOC]
+| link:08_ControllerLayer.adoc[Working with the Controller Layer]
+|===

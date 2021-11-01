@@ -1,0 +1,5 @@
+= What is the spring-course?
+
+The Spring course consists of a tutorial that teach students about Spring Boot. The courses lay out examples that are discussed via documentation, located under the `assets\docs` directory.
+
+The best way to take this course is to checkout the entire project locally, then view:

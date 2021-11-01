@@ -1,0 +1,55 @@
+= Spring Boot - The Controller Layer
+:toc:
+:toclevels: 4
+
+Building the controller layer and its unit tests
+
+== The Controller Layer
+The controller layer breaks down the incoming HTTP request and makes the necessary calls to the
+service layers, acts as a layer marshalling and unmarshalling the request/response objects
+from/to JSON.
+
+The controller layer also pads the relevant metadata as a part of building out a response.
+
+The controller package has an interface and an implementation. The interface is covered in more
+detail in a subsequent chapter.
+
+. Controller +
+⇒ link:../../phonebook/src/main/java/com/codedifferently/phonebook/widgets/controllers/WidgetController.java[WidgetController.java]
+.. The controller implementation is marked with a `@RestController` stereotype.
+.. The class has a `@RequestMapping` annotation which provides a context path for the web URLs.
+.. The `constructor` autowires a `WidgetService` interface which is made available via a Spring
+context.
+.. The Controller Implementation validates the request body upon invocation and also creates the
+response body to return the desired content.
+.. The metadata information is baked into the responses built out from the service calls.
+
+'''
+
+== The Controller unit test
+The controller is tested with @SpringBootTest.
+
+. Test extending the abstract test setup +
+⇒ link:../../phonebook/src/test/java/com/codedifferently/phonebook/widgets/controllers/TodoAPIContractTest.java[TodoAPIContractTest.java]
+.. This test extends from the *abstract* test class which adds a *mock* implementation of the
+`TodoService` with a `@MockBean` annotation.
+.. The `@MockBean` is a mockito utility present in the `spring-boot-test.jar` that injects a bean
+into the Spring context after adding some mock responses.
+
+. Abstract mock setup +
+⇒ link:../../phonebook/src/test/java/com.codedifferently.phonebook/BaseControllerTest.java[BaseControllerTest.java]
+.. Abstract mock class (re-used in other tests)
+
+'''
+
+== Exercise Lab
+
+image:../../assets/images/labtime.png[Lab, align="center"]
+
+. Create the lab responses and controller layers and appropriate unit tests.
+.. Cover the basic HTTP Error code responses shown in the sample.
+. The following controller APIs should be created:
+.. All CRUD related calls
+.. Find By lastName, should return a list.
+
+'''
