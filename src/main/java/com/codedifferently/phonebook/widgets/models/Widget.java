@@ -2,6 +2,7 @@ package com.codedifferently.phonebook.widgets.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -46,6 +47,20 @@ public class Widget {
 
     public void setWidgetParts(List<WidgetPart> widgetParts) {
         this.widgetParts = widgetParts;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Widget widget = (Widget) o;
+        return Objects.equals(name, widget.name) && Objects.equals(widgetParts, widget.widgetParts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, widgetParts);
     }
 
     @Override
